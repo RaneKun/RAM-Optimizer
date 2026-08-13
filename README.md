@@ -40,7 +40,7 @@ RAM Optimizer (Robust) is an **aggressive, automated** RAM optimization tool des
 - **No Manual Triggers:** Purely scheduled
 
 ### 📋 Simple Logging
-- **Text Log File:** `C:\Scripts\FreeRAM_Log.txt`
+- **Text Log File:** `C:\Scripts\memory_cleanup\FreeRAM_Log.txt`
 - **Timestamp Entries:** Date and time of each run
 - **Before/After Stats:** Shows freed amounts
 - **Easy to Read:** Human-readable format
@@ -86,7 +86,7 @@ RAM Optimizer (Robust) is an **aggressive, automated** RAM optimization tool des
 #### 1️⃣ Create Scripts Folder
 ```cmd
 # Open Command Prompt or PowerShell and run:
-mkdir C:\Scripts
+mkdir C:\Scripts\memory_cleanup
 ```
 
 Or manually:
@@ -97,21 +97,21 @@ Or manually:
 #### 2️⃣ Download Files
 Download the Robust version from [Releases](https://github.com/RaneKun/RAM-Optimizer/releases)
 
-#### 3️⃣ Copy ALL Files to C:\Scripts\
-Copy these files to `C:\Scripts\`:
+#### 3️⃣ Copy ALL Files to C:\Scripts\memory_cleanup\
+Copy these files to `C:\Scripts\memory_cleanup\`:
 - `EmptyStandbyList.exe` - Memory clearing tool
 - `FreeRAM.ps1` - Main PowerShell script
 - `FreeRAM_Hidden.vbs` - Silent execution wrapper
 - `Free up memory usage.xml` - Task Scheduler configuration
 
-**Important:** Files must be in `C:\Scripts\` exactly, not in a subfolder!
+**Important:** Files must be in `C:\Scripts\memory_cleanup\` exactly, not in a subfolder!
 
 **Verify:**
 ```
-C:\Scripts\EmptyStandbyList.exe
-C:\Scripts\FreeRAM.ps1
-C:\Scripts\FreeRAM_Hidden.vbs
-C:\Scripts\Free up memory usage.xml
+C:\Scripts\memory_cleanup\EmptyStandbyList.exe
+C:\Scripts\memory_cleanup\FreeRAM.ps1
+C:\Scripts\memory_cleanup\FreeRAM_Hidden.vbs
+C:\Scripts\memory_cleanup\Free up memory usage.xml
 ```
 
 #### 4️⃣ Import Task into Task Scheduler
@@ -121,7 +121,7 @@ C:\Scripts\Free up memory usage.xml
 2. Type `taskschd.msc` and press Enter
 3. Task Scheduler opens
 4. Click **Action** → **Import Task...**
-5. Navigate to `C:\Scripts\`
+5. Navigate to `C:\Scripts\memory_cleanup\`
 6. Select `Free up memory usage.xml`
 7. Click **Open**
 8. When prompted, enter your Windows **username**
@@ -130,7 +130,7 @@ C:\Scripts\Free up memory usage.xml
 **Method 2: Command Line**
 ```powershell
 # Open PowerShell as Administrator
-schtasks /create /xml "C:\Scripts\Free up memory usage.xml" /tn "Free up memory usage"
+schtasks /create /xml "C:\Scripts\memory_cleanup\Free up memory usage.xml" /tn "Free up memory usage"
 ```
 
 #### 5️⃣ Verify Installation
@@ -146,7 +146,7 @@ schtasks /create /xml "C:\Scripts\Free up memory usage.xml" /tn "Free up memory 
 **Test Manually:**
 1. In Task Scheduler, find the task
 2. Right-click → **Run**
-3. Check `C:\Scripts\FreeRAM_Log.txt`
+3. Check `C:\Scripts\memory_cleanup\FreeRAM_Log.txt`
 4. Should see a new entry with timestamp and freed amount
 
 #### 6️⃣ Done! 🎉
@@ -163,7 +163,7 @@ The task will now run automatically every 15 minutes, silently in the background
 Once installed, it runs automatically. You never need to interact with it.
 
 **To verify it's working:**
-1. Open `C:\Scripts\FreeRAM_Log.txt`
+1. Open `C:\Scripts\memory_cleanup\FreeRAM_Log.txt`
 2. See entries like:
    ```
    2025-01-21 10:15:00 | Freed: 1.23GB | Before: 4.5GB free -> After: 5.73GB free | Total: 16GB
@@ -175,12 +175,12 @@ Once installed, it runs automatically. You never need to interact with it.
 
 **Quick View:**
 ```cmd
-notepad C:\Scripts\FreeRAM_Log.txt
+notepad C:\Scripts\memory_cleanup\FreeRAM_Log.txt
 ```
 
 **Or:**
 - Open File Explorer
-- Navigate to `C:\Scripts\`
+- Navigate to `C:\Scripts\memory_cleanup\`
 - Double-click `FreeRAM_Log.txt`
 
 ### Temporarily Disable
@@ -260,8 +260,8 @@ Done (silently)
 
 1. **Configuration:**
    ```powershell
-   $standbyClearTool = "C:\Scripts\EmptyStandbyList.exe"
-   $logFile = "C:\Scripts\FreeRAM_Log.txt"
+   $standbyClearTool = "C:\Scripts\memory_cleanup\EmptyStandbyList.exe"
+   $logFile = "C:\Scripts\memory_cleanup\FreeRAM_Log.txt"
    ```
 
 2. **Get Memory Before:**
@@ -301,7 +301,7 @@ Done (silently)
 
 ```vbscript
 Set objShell = CreateObject("Wscript.Shell")
-objShell.Run "powershell.exe -ExecutionPolicy Bypass -File ""C:\Scripts\FreeRAM.ps1""", 0, False
+objShell.Run "powershell.exe -ExecutionPolicy Bypass -File ""C:\Scripts\memory_cleanup\FreeRAM.ps1""", 0, False
 ```
 
 - `0` = Hidden window
@@ -327,7 +327,7 @@ Edit `FreeRAM.ps1`:
 
 ```powershell
 # Change this line:
-$logFile = "C:\Scripts\FreeRAM_Log.txt"
+$logFile = "C:\Scripts\memory_cleanup\FreeRAM_Log.txt"
 
 # To something like:
 $logFile = "D:\MyLogs\RAMOptimizer.log"
@@ -428,28 +428,28 @@ if ($usedPercent -lt 70) {
 
 5. **Verify file paths:**
    ```cmd
-   dir C:\Scripts\EmptyStandbyList.exe
-   dir C:\Scripts\FreeRAM.ps1
-   dir C:\Scripts\FreeRAM_Hidden.vbs
+   dir C:\Scripts\memory_cleanup\EmptyStandbyList.exe
+   dir C:\Scripts\memory_cleanup\FreeRAM.ps1
+   dir C:\Scripts\memory_cleanup\FreeRAM_Hidden.vbs
    ```
    All should exist!
 
 ### No Log File Created
 
-**Symptom:** `C:\Scripts\FreeRAM_Log.txt` doesn't exist
+**Symptom:** `C:\Scripts\memory_cleanup\FreeRAM_Log.txt` doesn't exist
 
 **Solutions:**
 
 1. **Verify write permissions:**
    ```powershell
    # Test writing to directory:
-   echo "test" > C:\Scripts\test.txt
+   echo "test" > C:\Scripts\memory_cleanup\test.txt
    ```
    If error: Permission issue
 
 2. **Run script manually to see errors:**
    ```powershell
-   cd C:\Scripts
+   cd C:\Scripts\memory_cleanup
    .\FreeRAM.ps1
    ```
    Check for error messages
@@ -457,11 +457,11 @@ if ($usedPercent -lt 70) {
 3. **Check script paths:**
    - Open `FreeRAM.ps1` in Notepad
    - Verify `$logFile` path is correct
-   - Should be `C:\Scripts\FreeRAM_Log.txt`
+   - Should be `C:\Scripts\memory_cleanup\FreeRAM_Log.txt`
 
 4. **Try creating file manually:**
    ```powershell
-   New-Item -Path "C:\Scripts\FreeRAM_Log.txt" -ItemType File
+   New-Item -Path "C:\Scripts\memory_cleanup\FreeRAM_Log.txt" -ItemType File
    ```
 
 ### EmptyStandbyList.exe Blocked by Antivirus
@@ -478,7 +478,7 @@ if ($usedPercent -lt 70) {
 1. **Add exception in antivirus:**
    - Open your antivirus software
    - Find "Exceptions" or "Exclusions"
-   - Add `C:\Scripts\EmptyStandbyList.exe`
+   - Add `C:\Scripts\memory_cleanup\EmptyStandbyList.exe`
 
 2. **Verify file integrity:**
    - Download from trusted source
@@ -545,18 +545,18 @@ if ($usedPercent -lt 70) {
 
 1. **Verify VBS file exists:**
    ```cmd
-   dir C:\Scripts\FreeRAM_Hidden.vbs
+   dir C:\Scripts\memory_cleanup\FreeRAM_Hidden.vbs
    ```
 
 2. **Check task action:**
    - Task properties → Actions tab
-   - Should run: `C:\Scripts\FreeRAM_Hidden.vbs`
-   - Not: `C:\Scripts\FreeRAM.ps1`
+   - Should run: `C:\Scripts\memory_cleanup\FreeRAM_Hidden.vbs`
+   - Not: `C:\Scripts\memory_cleanup\FreeRAM.ps1`
 
 3. **Edit task action:**
    - Actions tab → Edit
    - Program/script: `wscript.exe`
-   - Add arguments: `C:\Scripts\FreeRAM_Hidden.vbs`
+   - Add arguments: `C:\Scripts\memory_cleanup\FreeRAM_Hidden.vbs`
 
 ### Task Scheduler Says "Could not start"
 
@@ -565,7 +565,7 @@ if ($usedPercent -lt 70) {
 **Common causes:**
 
 1. **File paths wrong:**
-   - All files must be in `C:\Scripts\`
+   - All files must be in `C:\Scripts\memory_cleanup\`
    - Check paths in VBS file
    - Check paths in PowerShell script
 
@@ -722,7 +722,7 @@ if ($usedPercent -lt 70) {
 
 3. **Test manually before scheduling:**
    ```powershell
-   cd C:\Scripts
+   cd C:\Scripts\memory_cleanup
    .\FreeRAM.ps1
    ```
 
@@ -838,12 +838,12 @@ if ($usedPercent -lt 70) {
 ### Before Asking for Help
 
 1. **Check the log file:**
-   - `C:\Scripts\FreeRAM_Log.txt`
+   - `C:\Scripts\memory_cleanup\FreeRAM_Log.txt`
    - Look for error messages
 
 2. **Run script manually:**
    ```powershell
-   cd C:\Scripts
+   cd C:\Scripts\memory_cleanup
    .\FreeRAM.ps1
    ```
    Note any errors
