@@ -4,8 +4,8 @@
 # -------------------------
 # Configuration
 # -------------------------
-$standbyClearTool = "C:\Scripts\EmptyStandbyList.exe"   # Path to EmptyStandbyList.exe
-$logFile = "C:\Scripts\FreeRAM_Log.txt"
+$standbyClearTool = "C:\Scripts\memory_cleanup\EmptyStandbyList.exe"    # Path to EmptyStandbyList.exe
+$logFile = "C:\Scripts\memory_cleanup\FreeRAM_Log.txt"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # -------------------------
